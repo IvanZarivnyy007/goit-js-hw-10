@@ -1,0 +1,28 @@
+.timer {
+  display: flex;
+  margin-top: 15px;
+}
+
+.field {
+  margin-left: 15px;
+  margin-bottom: 15px;
+}
+
+.value {
+  display: flex;
+  flex-direction: column-reverse;
+  flex-wrap: wrap;
+  align-content: center;
+  color: blue;
+}
+
+.label {
+  display: flex;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.time-value {
+  font-size: 24px;
+  margin-right: 5px;
+}

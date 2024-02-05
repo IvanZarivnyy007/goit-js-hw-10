@@ -1,10 +1,18 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 
 let userSelectedDate = '';
 const currentDate = new Date();
 
 let button = document.querySelector('[data-start]');
+let dataDays = document.querySelector('[data-days]');
+let dataHours = document.querySelector('[data-hours]');
+let dataMinutes = document.querySelector('[data-minutes]');
+let dataSeconds = document.querySelector('[data-seconds]');
+// let time = document.querySelector('.time');
+
 button.setAttribute('disabled', '');
 const options = {
   enableTime: true,
@@ -14,11 +22,17 @@ const options = {
   onClose(selectedDates) {
     userSelectedDate = selectedDates[0];
   },
-  onChange: function (selectedDates, dateStr, instance) {
+  onChange: function (selectedDates) {
     const selectedDate = selectedDates[0];
 
     if (selectedDate <= currentDate) {
-      alert('Please choose a date in the future');
+      iziToast.show({
+        message: 'Please choose a date in the future',
+        position: 'topRight',
+        title: 'Warning',
+        color: 'red',
+      });
+
       button.setAttribute('disabled', '');
     } else {
       button.removeAttribute('disabled');
@@ -35,7 +49,13 @@ button.addEventListener('click', () => {
     const { days, hours, minutes, seconds } = convertMs(
       userSelectedDate - new Date()
     );
-    console.log(days, hours, minutes, seconds);
+
+    dataDays.textContent = days;
+    dataHours.textContent = hours;
+    dataMinutes.textContent = minutes;
+    dataSeconds.textContent = seconds;
+
+    // console.log(days, hours, minutes, seconds);
     if (!days && !hours && !minutes && !seconds) {
       clearInterval(interval);
     }
@@ -58,3 +78,13 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
+
+function addLeadingZero({ days, hours, minutes, seconds }) {
+  days = days.toString().padStart(2, '0');
+  hours = hours.toString().padStart(2, '0');
+  minutes = minutes.toString().padStart(2, '0');
+  seconds = seconds.toString().padStart(2, '0');
+
+  return `${days}:${hours}:${minutes}:${seconds}`;
+}
+// console.log(addLeadingZero);
