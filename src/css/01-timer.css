@@ -13,12 +13,24 @@
   flex-direction: column-reverse;
   flex-wrap: wrap;
   align-content: center;
-  color: blue;
+  color: darkblue;
+  font-size: 24px;
+
+  padding: 5px;
+  margin-bottom: 10px;
+
+  border: solid 1px black;
+  border-radius: 3px;
+
+  width: 50px;
 }
 
 .label {
   display: flex;
+  justify-content: center;
+
   font-weight: bold;
+
   margin-bottom: 5px;
 }
 

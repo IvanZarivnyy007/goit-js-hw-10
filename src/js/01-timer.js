@@ -50,12 +50,11 @@ button.addEventListener('click', () => {
       userSelectedDate - new Date()
     );
 
-    dataDays.textContent = days;
-    dataHours.textContent = hours;
-    dataMinutes.textContent = minutes;
-    dataSeconds.textContent = seconds;
+    dataDays.textContent = addLeadingZero(days);
+    dataHours.textContent = addLeadingZero(hours);
+    dataMinutes.textContent = addLeadingZero(minutes);
+    dataSeconds.textContent = addLeadingZero(seconds);
 
-    // console.log(days, hours, minutes, seconds);
     if (!days && !hours && !minutes && !seconds) {
       clearInterval(interval);
     }
@@ -79,12 +78,6 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-function addLeadingZero({ days, hours, minutes, seconds }) {
-  days = days.toString().padStart(2, '0');
-  hours = hours.toString().padStart(2, '0');
-  minutes = minutes.toString().padStart(2, '0');
-  seconds = seconds.toString().padStart(2, '0');
-
-  return `${days}:${hours}:${minutes}:${seconds}`;
+function addLeadingZero(dateStr) {
+  return dateStr.toString().padStart(2, '0');
 }
-// console.log(addLeadingZero);
