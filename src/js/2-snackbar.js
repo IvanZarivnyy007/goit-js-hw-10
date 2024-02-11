@@ -17,23 +17,28 @@ function createPromise(event) {
   const promise = new Promise((resolve, reject) => {
     setTimeout(() => {
       if (radioValue === 'fulfilled') {
-        iziToast.show({
-          message: `✅ Fulfilled promise in ${delay}ms`,
-          position: 'topRight',
-          title: 'Success',
-          color: 'green',
-        });
-        resolve();
+        resolve(`✅ Fulfilled promise in ${delay}ms`);
       } else {
-        iziToast.show({
-          message: `❌ Rejected promise in ${delay}ms`,
-          position: 'topRight',
-          title: 'Warning',
-          color: 'red',
-        });
-        reject();
+        reject(`❌ Rejected promise in ${delay}ms`);
       }
     }, delay);
   });
-  return promise;
+
+  promise
+    .then(message => {
+      iziToast.show({
+        message,
+        position: 'topRight',
+        title: 'Success',
+        color: 'green',
+      });
+    })
+    .catch(message => {
+      iziToast.show({
+        message,
+        position: 'topRight',
+        title: 'Warning',
+        color: 'red',
+      });
+    });
 }

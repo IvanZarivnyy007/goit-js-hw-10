@@ -20,11 +20,7 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    userSelectedDate = selectedDates[0];
-  },
-  onChange: function (selectedDates) {
     const selectedDate = selectedDates[0];
-
     if (selectedDate <= currentDate) {
       iziToast.show({
         message: 'Please choose a date in the future',
@@ -32,11 +28,11 @@ const options = {
         title: 'Warning',
         color: 'red',
       });
-
       button.setAttribute('disabled', '');
     } else {
       button.removeAttribute('disabled');
     }
+    userSelectedDate = selectedDate;
   },
 };
 
